@@ -1,7 +1,7 @@
 #include"windows.h"
 #include<stdio.h>
-#define PageSizex 1000 //窗口宽
-#define PageSizey 600 //窗口长
+#define PageSizex 260 //窗口宽
+#define PageSizey 220 //窗口高
 
 //#ifdef _UNICODE
 //#if defined _M_IX86
