@@ -13,7 +13,7 @@
 //#endif
 //#endif
 LRESULT CALLBACK CallBack(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);//声明回调函数
-int hButton1;
+int hButton_gongneng[100]={0};
 int hFont;
 int hbuttonN[100] = { 0 };
 //WINAPI: 调用约定，调用约定，主要是参数的入栈顺序，这个栈空间的清理者，
@@ -85,10 +85,10 @@ int WINAPI WinMain(
 		TEXT("微软雅黑")  //字体名
 	);
 
-	hButton1 = CreateWindowEx(
+	hButton_gongneng[0] = CreateWindowEx(
 		0,
 		"BUTTON",
-		"归零",
+		"C",
 		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
 		0,//x
 		30,//y
@@ -96,6 +96,104 @@ int WINAPI WinMain(
 		20,//high
 		hWnd,//父窗口
 		-1,//HMENU消息ID
+		hInstance,
+		NULL
+	);
+	hButton_gongneng[1] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"CE",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		55,//x
+		30,//y
+		50,//long
+		20,//high
+		hWnd,//父窗口
+		-2,//HMENU消息ID
+		hInstance,
+		NULL
+	);
+	hButton_gongneng[2] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"BP",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		110,//x
+		30,//y
+		50,//long
+		20,//high
+		hWnd,//父窗口
+		-3,//HMENU消息ID
+		hInstance,
+		NULL
+	);
+	hButton_gongneng[3] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"÷",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		165,//x
+		30,//y
+		50,//long
+		20,//high
+		hWnd,//父窗口
+		-4,//HMENU消息ID
+		hInstance,
+		NULL
+	);
+	hButton_gongneng[4] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"×",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		165,//x
+		55,//y
+		50,//long
+		20,//high
+		hWnd,//父窗口
+		-5,//HMENU消息ID
+		hInstance,
+		NULL
+	);
+	hButton_gongneng[5] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"-",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		165,//x
+		80,//y
+		50,//long
+		20,//high
+		hWnd,//父窗口
+		-6,//HMENU消息ID
+		hInstance,
+		NULL
+	);
+	hButton_gongneng[6] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"+",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		165,//x
+		105,//y
+		50,//long
+		20,//high
+		hWnd,//父窗口
+		-7,//HMENU消息ID
+		hInstance,
+		NULL
+	);
+	hButton_gongneng[4] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"=",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		165,//x
+		130,//y
+		50,//long
+		20,//high
+		hWnd,//父窗口
+		-8,//HMENU消息ID
 		hInstance,
 		NULL
 	);
@@ -137,8 +235,8 @@ int WINAPI WinMain(
 		50,
 		20,
 		hWnd,
-		NULL,
 		9,
+		hInstance,
 		NULL
 	);
 	hbuttonN[3] = CreateWindowEx(
@@ -151,8 +249,8 @@ int WINAPI WinMain(
 		50,
 		20,
 		hWnd,
-		NULL,
 		4,
+		hInstance,
 		NULL
 	);
 	hbuttonN[4] = CreateWindowEx(
@@ -226,7 +324,49 @@ int WINAPI WinMain(
 		hInstance,
 		NULL
 	);
-	SendMessage(hButton1, WM_SETFONT, (WPARAM)hFont, NULL);//设置按钮字体
+	hbuttonN[9] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"0",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		55,
+		130,
+		50,
+		20,
+		hWnd,
+		0,
+		hInstance,
+		NULL
+	);
+	hbuttonN[10] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"+/-",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		0,
+		130,
+		50,
+		20,
+		hWnd,
+		10,
+		hInstance,
+		NULL
+	);
+	hbuttonN[11] = CreateWindowEx(
+		0,
+		"BUTTON",
+		".",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		110,
+		130,
+		50,
+		20,
+		hWnd,
+		11,
+		hInstance,
+		NULL
+	);
+	//SendMessage(hButton_gongneng[0], WM_SETFONT, (WPARAM)hFont, NULL);//设置按钮字体
 	CreateWindowEx(
 		0,
 		"STATIC",
@@ -284,6 +424,7 @@ LRESULT CALLBACK CallBack(
 	switch (nMsg)
 	{
 	case WM_DESTROY:
+		MessageBox(0,"FUCK YOU","ERROR", MB_OK);
 		PostQuitMessage(0); //在点击窗口关闭键 返回0给Getmessage函数 停止信息接受循环
 		//点击叉叉 会经过  WM_CLOSE->WM_DESTORY->WM_QUIT  处理消息 
 		break;
@@ -295,12 +436,61 @@ LRESULT CALLBACK CallBack(
 			//	break;
 		case -1:
 		{
-			printf("%d", wmId);
+
 			break;
 		}
 		case 1:
 		{
-			//MessageBeep(MB_ICONHAND);//轻dideng
+			printf("%d", wmId);
+			MessageBeep(MB_ICONHAND);//轻dideng
+			break;
+		}
+		case 2:
+		{
+			printf("%d", wmId);
+			MessageBeep(MB_ICONHAND);//轻dideng
+			break;
+		}
+		case 3:
+		{
+			printf("%d", wmId);
+			MessageBeep(MB_ICONHAND);//轻dideng
+			break;
+		}
+		case 4:
+		{
+			printf("%d", wmId);
+			MessageBeep(MB_ICONHAND);//轻dideng
+			break;
+		}
+		case 5:
+		{
+			printf("%d", wmId);
+			MessageBeep(MB_ICONHAND);//轻dideng
+			break;
+		}
+		case 6:
+		{
+			printf("%d", wmId);
+			MessageBeep(MB_ICONHAND);//轻dideng
+			break;
+		}
+		case 7:
+		{
+			printf("%d", wmId);
+			MessageBeep(MB_ICONHAND);//轻dideng
+			break;
+		}
+		case 8:
+		{
+			printf("%d", wmId);
+			MessageBeep(MB_ICONHAND);//轻dideng
+			break;
+		}
+		case 9:
+		{
+			printf("%d", wmId);
+			MessageBeep(MB_ICONHAND);//轻dideng
 			break;
 		}
 		default:
