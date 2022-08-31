@@ -1,9 +1,21 @@
 #include"windows.h"
 #define PageSizex 1000 //窗口宽
 #define PageSizey 600 //窗口长
+
+
+//#ifdef _UNICODE
+//#if defined _M_IX86
+//#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
+//#elif defined _M_X64
+//#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='amd64' publicKeyToken='6595b64144ccf1df' language='*'\"")
+//#else
+//#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+//#endif
+//#endif
 LRESULT CALLBACK CallBack(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);//声明回调函数
-
-
+int hButton1;
+int hFont;
+int hbuttonN[100] = {0};
 //WINAPI: 调用约定，调用约定，主要是参数的入栈顺序，这个栈空间的清理者，
 // 在其他代码中 __stdcall, APIENTRY都是一样，可以转到定义查看，
 // 
@@ -51,7 +63,7 @@ int WINAPI WinMain(
 	hWnd = CreateWindowEx(
 		WS_EX_TOPMOST, //dwExStyle 窗口附加属性：显示在最顶层
 		"FirstWin", // lpClassName 窗口类的名字， 给系统看的，同前 
-		"俺的第一个窗口",  //lpWindowName 窗口显示的名字
+		"WINDOWS DEMO",  //lpWindowName 窗口显示的名字
 		WS_OVERLAPPEDWINDOW,  //dwStyle 窗口创建风格 可以一个或多个用 | 连接
 		100, //x 指定窗口的显示的x坐标，相对与桌面
 		100, //y 指定窗口的显示的y坐标，相对与桌面
@@ -63,6 +75,172 @@ int WINAPI WinMain(
 		NULL //lpParam 
 	);
 
+	hFont = CreateFont(
+		-15/*高度*/, -7.5/*宽度*/, 0, 0, 400 /*一般这个值设为400*/,
+		FALSE/*不带斜体*/, FALSE/*不带下划线*/, FALSE/*不带删除线*/,
+		DEFAULT_CHARSET,  //使用默认字符集
+		OUT_CHARACTER_PRECIS, CLIP_CHARACTER_PRECIS,  //这行参数不用管
+		DEFAULT_QUALITY,  //默认输出质量
+		FF_DONTCARE,  //不指定字体族*/
+		TEXT("微软雅黑")  //字体名
+	);
+
+	hButton1=CreateWindowEx(
+		0,
+		"BUTTON",
+		"归零",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		0,
+		30,
+		50,
+		20,
+		hWnd,
+		NULL,
+		hInstance,
+		NULL
+	);
+	hbuttonN[0] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"7",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		0,
+		55,
+		50,
+		20,
+		hWnd,
+		NULL,
+		hInstance,
+		NULL
+	);
+	hbuttonN[1] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"8",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		55,
+		55,
+		50,
+		20,
+		hWnd,
+		NULL,
+		hInstance,
+		NULL
+	);
+	hbuttonN[2] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"9",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		110,
+		55,
+		50,
+		20,
+		hWnd,
+		NULL,
+		hInstance,
+		NULL
+	);
+	hbuttonN[3] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"4",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		0,
+		80,
+		50,
+		20,
+		hWnd,
+		NULL,
+		hInstance,
+		NULL
+	);
+	hbuttonN[4] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"5",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		55,
+		80,
+		50,
+		20,
+		hWnd,
+		NULL,
+		hInstance,
+		NULL
+	);
+	hbuttonN[5] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"6",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		110,
+		80,
+		50,
+		20,
+		hWnd,
+		NULL,
+		hInstance,
+		NULL
+	);
+
+	 hbuttonN[6] = CreateWindowEx(
+		 0,
+		 "BUTTON",
+		 "1",
+		 WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		 0,
+		 105,
+		 50,
+		 20,
+		 hWnd,
+		 NULL,
+		 hInstance,
+		 NULL
+	 );
+	 hbuttonN[7] = CreateWindowEx(
+		 0,
+		 "BUTTON",
+		 "2",
+		 WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		 55,
+		 105,
+		 50,
+		 20,
+		 hWnd,
+		 NULL,
+		 hInstance,
+		 NULL
+	 );
+	 hbuttonN[8] = CreateWindowEx(
+		 0,
+		 "BUTTON",
+		 "3",
+		 WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		 110,
+		 105,
+		 50,
+		 20,
+		 hWnd,
+		 NULL,
+		 hInstance,
+		 NULL
+	 );
+	 SendMessage(hButton1, WM_SETFONT, (WPARAM)hFont, NULL);//设置按钮字体
+	 CreateWindowEx(
+		 0,
+		 "STATIC",
+		 "计算器DEMO",
+		 WS_CHILD /*子窗口*/ | WS_VISIBLE /*创建时显示*/ | WS_BORDER /*带边框*/,
+		 0,
+		 0,
+		 300,
+		 25,
+		 hWnd,
+		 NULL,
+		 hInstance,
+		 NULL
+	 );
 	if (NULL == hWnd) //窗口句柄  窗口唯一标识
 	{
 		return 0;
