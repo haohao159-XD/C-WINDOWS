@@ -1,7 +1,7 @@
 #include"windows.h"
+#include<stdio.h>
 #define PageSizex 1000 //窗口宽
 #define PageSizey 600 //窗口长
-
 
 //#ifdef _UNICODE
 //#if defined _M_IX86
@@ -15,7 +15,7 @@
 LRESULT CALLBACK CallBack(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);//声明回调函数
 int hButton1;
 int hFont;
-int hbuttonN[100] = {0};
+int hbuttonN[100] = { 0 };
 //WINAPI: 调用约定，调用约定，主要是参数的入栈顺序，这个栈空间的清理者，
 // 在其他代码中 __stdcall, APIENTRY都是一样，可以转到定义查看，
 // 
@@ -85,17 +85,17 @@ int WINAPI WinMain(
 		TEXT("微软雅黑")  //字体名
 	);
 
-	hButton1=CreateWindowEx(
+	hButton1 = CreateWindowEx(
 		0,
 		"BUTTON",
 		"归零",
 		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
-		0,
-		30,
-		50,
-		20,
-		hWnd,
-		NULL,
+		0,//x
+		30,//y
+		50,//long
+		20,//high
+		hWnd,//父窗口
+		-1,//HMENU消息ID
 		hInstance,
 		NULL
 	);
@@ -109,7 +109,7 @@ int WINAPI WinMain(
 		50,
 		20,
 		hWnd,
-		NULL,
+		7,
 		hInstance,
 		NULL
 	);
@@ -123,7 +123,7 @@ int WINAPI WinMain(
 		50,
 		20,
 		hWnd,
-		NULL,
+		8,
 		hInstance,
 		NULL
 	);
@@ -138,7 +138,7 @@ int WINAPI WinMain(
 		20,
 		hWnd,
 		NULL,
-		hInstance,
+		9,
 		NULL
 	);
 	hbuttonN[3] = CreateWindowEx(
@@ -152,7 +152,7 @@ int WINAPI WinMain(
 		20,
 		hWnd,
 		NULL,
-		hInstance,
+		4,
 		NULL
 	);
 	hbuttonN[4] = CreateWindowEx(
@@ -165,7 +165,7 @@ int WINAPI WinMain(
 		50,
 		20,
 		hWnd,
-		NULL,
+		5,
 		hInstance,
 		NULL
 	);
@@ -179,68 +179,68 @@ int WINAPI WinMain(
 		50,
 		20,
 		hWnd,
-		NULL,
+		6,
 		hInstance,
 		NULL
 	);
 
-	 hbuttonN[6] = CreateWindowEx(
-		 0,
-		 "BUTTON",
-		 "1",
-		 WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
-		 0,
-		 105,
-		 50,
-		 20,
-		 hWnd,
-		 NULL,
-		 hInstance,
-		 NULL
-	 );
-	 hbuttonN[7] = CreateWindowEx(
-		 0,
-		 "BUTTON",
-		 "2",
-		 WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
-		 55,
-		 105,
-		 50,
-		 20,
-		 hWnd,
-		 NULL,
-		 hInstance,
-		 NULL
-	 );
-	 hbuttonN[8] = CreateWindowEx(
-		 0,
-		 "BUTTON",
-		 "3",
-		 WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
-		 110,
-		 105,
-		 50,
-		 20,
-		 hWnd,
-		 NULL,
-		 hInstance,
-		 NULL
-	 );
-	 SendMessage(hButton1, WM_SETFONT, (WPARAM)hFont, NULL);//设置按钮字体
-	 CreateWindowEx(
-		 0,
-		 "STATIC",
-		 "计算器DEMO",
-		 WS_CHILD /*子窗口*/ | WS_VISIBLE /*创建时显示*/ | WS_BORDER /*带边框*/,
-		 0,
-		 0,
-		 300,
-		 25,
-		 hWnd,
-		 NULL,
-		 hInstance,
-		 NULL
-	 );
+	hbuttonN[6] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"1",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		0,
+		105,
+		50,
+		20,
+		hWnd,
+		1,
+		hInstance,
+		NULL
+	);
+	hbuttonN[7] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"2",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		55,
+		105,
+		50,
+		20,
+		hWnd,
+		2,
+		hInstance,
+		NULL
+	);
+	hbuttonN[8] = CreateWindowEx(
+		0,
+		"BUTTON",
+		"3",
+		WS_CHILD | WS_VISIBLE | WS_BORDER | BS_FLAT,
+		110,
+		105,
+		50,
+		20,
+		hWnd,
+		3,
+		hInstance,
+		NULL
+	);
+	SendMessage(hButton1, WM_SETFONT, (WPARAM)hFont, NULL);//设置按钮字体
+	CreateWindowEx(
+		0,
+		"STATIC",
+		"计算器DEMO",
+		WS_CHILD /*子窗口*/ | WS_VISIBLE /*创建时显示*/ | WS_BORDER /*带边框*/,
+		0,
+		0,
+		300,
+		25,
+		hWnd,
+		NULL,
+		hInstance,
+		NULL
+	);
 	if (NULL == hWnd) //窗口句柄  窗口唯一标识
 	{
 		return 0;
@@ -272,11 +272,13 @@ int WINAPI WinMain(
 // LRESULT 处理消息产生的一个有符号值	CALLBACK调用约定
 
 LRESULT CALLBACK CallBack(
+
 	HWND hWnd, //窗口句柄
 	UINT nMsg, //消息ID  UIMT 其实就是一个unsigned int
 	WPARAM wParam, LPARAM lParam //每条信息所带的两条数据 'word'数据类型，’long‘数据类型
 )
 {
+	int wmId, wmEvent;
 	PAINTSTRUCT pst;
 	HDC hDC;
 	switch (nMsg)
@@ -285,6 +287,27 @@ LRESULT CALLBACK CallBack(
 		PostQuitMessage(0); //在点击窗口关闭键 返回0给Getmessage函数 停止信息接受循环
 		//点击叉叉 会经过  WM_CLOSE->WM_DESTORY->WM_QUIT  处理消息 
 		break;
+	case WM_COMMAND:
+		wmId = LOWORD(wParam);
+		wmEvent = HIWORD(wParam);
+		switch (wmId) {
+			//case 2:  //按下按钮
+			//	break;
+		case -1:
+		{
+			printf("%d", wmId);
+			break;
+		}
+		case 1:
+		{
+			//MessageBeep(MB_ICONHAND);//轻dideng
+			break;
+		}
+		default:
+			//不处理的消息一定要交给 DefWindowProc 处理。
+			return DefWindowProc(hWnd, nMsg, wParam, lParam);
+		}
+
 	}
 	return DefWindowProc(hWnd, nMsg, wParam, lParam);//默认系统处理其他消息
 	//保持系统连贯性
